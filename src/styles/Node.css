@@ -1,0 +1,35 @@
+.node {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #7ef3b4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    color: #121212;
+    font-size: 0.9rem;
+  }
+  
+  .node:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .node::after {
+    content: "→"; /* Arrow pointing to the next node */
+    position: absolute;
+    top: 50%;
+    right: -40px; /* Adjust spacing to align arrow with next node */
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+  }
+  
+  .node:last-child::after {
+    content: ""; /* Remove the arrow for the last node */
+  }
+  

@@ -1,0 +1,99 @@
+/* Node Styles */
+.node {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  /* Start Node */
+  .node-start {
+    background-color: green;
+    border: 2px solid darkgreen;
+  }
+  
+  /* Finish Node */
+  .node-finish {
+    background-color: red;
+    border: 2px solid darkred;
+  }
+  
+  /* Wall Node */
+  .node-wall {
+    background-color: black;
+  }
+  
+  /* Visited Node */
+  .node-visited {
+    background-color: lightblue;
+    animation: visited-animation 0.6s ease-in-out;
+  }
+  
+  /* Shortest Path Node */
+  .node-shortest-path {
+    background-color: yellow;
+  }
+  
+  /* Marker for the start of the shortest path */
+  .start-marker {
+    position: relative;
+    border: 3px solid green;
+    animation: pulse-start 1s infinite;
+  }
+  
+  /* Marker for the end of the shortest path */
+  .end-marker {
+    position: relative;
+    border: 3px solid red;
+    animation: pulse-end 1s infinite;
+  }
+  
+  /* Animation for the start marker */
+  @keyframes pulse-start {
+    0% {
+      transform: scale(1);
+      border-color: rgba(0, 255, 0, 0.5);
+    }
+    50% {
+      transform: scale(1.2);
+      border-color: rgba(0, 255, 0, 1);
+    }
+    100% {
+      transform: scale(1);
+      border-color: rgba(0, 255, 0, 0.5);
+    }
+  }
+  
+  /* Animation for the end marker */
+  @keyframes pulse-end {
+    0% {
+      transform: scale(1);
+      border-color: rgba(255, 0, 0, 0.5);
+    }
+    50% {
+      transform: scale(1.2);
+      border-color: rgba(255, 0, 0, 1);
+    }
+    100% {
+      transform: scale(1);
+      border-color: rgba(255, 0, 0, 0.5);
+    }
+  }
+  
+  /* Shortest Path Animation */
+  @keyframes visited-animation {
+    0% {
+      transform: scale(0.5);
+      background-color: rgba(175, 216, 248, 0.3);
+    }
+    50% {
+      transform: scale(1.2);
+      background-color: rgba(175, 216, 248, 0.8);
+    }
+    100% {
+      transform: scale(1);
+      background-color: lightblue;
+    }
+  }
+  

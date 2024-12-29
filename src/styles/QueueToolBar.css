@@ -1,0 +1,66 @@
+.queue-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .queue-toolbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .queue-toolbar-row label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .queue-toolbar-row input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .queue-toolbar-row input[type="color"] {
+    width: 50px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .queue-toolbar-buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .queue-toolbar-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #4caf50, #2196f3);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .queue-toolbar-buttons button:hover {
+    background: linear-gradient(135deg, #2196f3, #4caf50);
+    transform: scale(1.05);
+  }
+  
+  .queue-toolbar-buttons button:active {
+    background: linear-gradient(135deg, #1e90ff, #32cd32);
+  }
+  

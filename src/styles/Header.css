@@ -1,0 +1,76 @@
+/* Header styling */
+.header {
+    position: relative; /* Not fixed, allows scrolling */
+    width: 100%; /* Full width */
+    background-color: #1a1a1a; /* Dark background */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    padding: 10px 0; /* Top and bottom padding */
+}
+
+/* Header content container */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between elements */
+    padding: 0 20px; /* Horizontal padding */
+}
+
+/* Center content when no back button is present */
+.header-content.center {
+    justify-content: center; /* Center align content */
+}
+
+/* Logo styling */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0; /* Prevent the logo from resizing */
+}
+
+.logo-image {
+    height: 80px; /* Adjust the logo size consistently */
+    width: auto; /* Maintain aspect ratio */
+}
+
+/* Title container styling */
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align title and subtitle */
+    text-align: center;
+}
+
+/* Title styling */
+.title {
+    font-size: 1.8rem; /* Larger font size */
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Created by text styling */
+.created-by {
+    font-size: 0.9rem; /* Smaller font size for subtitle */
+    color: #bbbbbb; /* Lighter gray color */
+    margin-top: 5px;
+}
+
+/* Back button styling */
+.back-button {
+    background: none;
+    color: white;
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 1s ease;
+    width: auto;
+    min-width: 10px; 
+}
+
+.back-button:hover {
+    background: red;
+    color: black;
+}

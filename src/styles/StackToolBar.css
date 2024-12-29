@@ -1,0 +1,103 @@
+/* StackToolBar.css */
+
+.stack-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+  }
+  
+  .stack-toolbar-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .stack-toolbar-row label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .stack-toolbar-row input[type="text"] {
+    width: 70%;
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .stack-toolbar-row input[type="color"] {
+    width: 50px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 3px;
+  }
+  
+  .stack-toolbar-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .stack-toolbar button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .stack-toolbar button:hover {
+    background-color: #45a049;
+  }
+  
+  .stack-toolbar button:active {
+    background-color: #3d8e43;
+  }
+  
+  .stack-toolbar button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .stack-toolbar-run {
+    margin-top: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .stack-toolbar-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .stack-toolbar-row input[type="text"],
+    .stack-toolbar-row input[type="color"] {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .stack-toolbar-buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .stack-toolbar button {
+      width: 100%;
+    }
+  }
+  

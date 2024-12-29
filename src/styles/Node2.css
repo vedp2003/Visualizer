@@ -1,0 +1,51 @@
+.node2 {
+  position: relative;
+  width: 140px; /* Bigger circles */
+  height: 140px; /* Bigger circles */
+  border-radius: 50%;
+  background: #7ef3b4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  color: #121212;
+  font-size: 1rem; /* Larger text for bigger circles */
+}
+
+.node2:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Arrow pointing to the next node (to the right and above) */
+.node2::after {
+  content: "→";
+  position: absolute;
+  right: -45px; /* Positioned to the right of the node */
+  top: 30%; /* Slightly above the center */
+  transform: translateY(-50%);
+  font-size: 3rem; /* Adjust size of the arrow */
+  color: white; /* White arrow */
+}
+
+/* Arrow pointing to the previous node (to the left and below) */
+.node2::before {
+  content: "←";
+  position: absolute;
+  left: -45px; /* Positioned to the left of the node */
+  top: 70%; /* Slightly below the center */
+  transform: translateY(-50%);
+  font-size: 3rem; /* Adjust size of the arrow */
+  color: white; /* White arrow */
+}
+
+/* Remove arrows for the first and last nodes */
+.node2:first-child::before {
+  content: ""; /* No arrow for the first node's prev */
+}
+
+.node2:last-child::after {
+  content: ""; /* No arrow for the last node's next */
+}

@@ -1,0 +1,53 @@
+.legend-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 10px 0;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .legend-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  
+  .unvisited-node {
+    background-color: #7ef3b4;
+  }
+  
+  .visited-node {
+    background-color: lightblue;
+  }
+  
+  .wall-node {
+    background-color: black;
+  }
+  
+  .shortest-path-node {
+    background-color: yellow;
+  }
+  
+  .start-node {
+    background-color: green;
+  }
+  
+  .finish-node {
+    background-color: red;
+  }
+  
+  .weight-node {
+    background-color: orange;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

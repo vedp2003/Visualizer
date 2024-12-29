@@ -1,0 +1,93 @@
+.StackVisualizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .stack-toolbar {
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .stack-toolbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .stack-toolbar-buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .stack-visualizer-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    justify-content: center;
+  }
+  
+  .stack-container {
+    display: flex;
+    flex-direction: column-reverse; 
+    align-items: center;
+    justify-content: flex-start;
+    border: 2px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    min-height: 500px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+  }
+  
+  .stack-node {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .stack-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    width: 100%;
+    transform: translateY(50%);
+    
+  }
+  
+  .stack-message-box {
+    margin: 20px auto; /* Center horizontally */
+    padding: 15px; /* Add more padding */
+    background-color: #ffe4b5;
+    border: 1px solid #ffcc80;
+    border-radius: 10px;
+    color: #8b4513;
+    font-size: 1.5rem; /* Increase font size */
+    text-align: center; /* Center the text */
+    width: 50%; /* Adjust width */
+    position: relative; /* Allow positioning */
+    top: 20px; /* Adjust vertical alignment */
+  }
+  .main-heading {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px; 
+    text-align: center;
+  }
+  

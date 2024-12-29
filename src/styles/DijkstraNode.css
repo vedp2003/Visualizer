@@ -1,0 +1,127 @@
+.node {
+    width: 30px;
+    height: 30px;
+    outline: 1px solid rgb(175, 216, 248); /* Light blue outline */
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+}
+  
+/* Start node style */
+.node-start {
+    background-color: green;
+    border: 2px solid darkgreen;
+    border-radius: 5px;
+}
+
+/* Finish node style */
+.node-finish {
+    background-color: red;
+    border: 2px solid darkred;
+    border-radius: 5px;
+}
+
+.node::after {
+    content: none; /* Prevent arrows from appearing by default */
+}
+
+.node-visited::after,
+.node-shortest-path::after {
+    content: ''; /* Only show arrows for these specific states */
+    position: absolute;
+    /* Add custom arrow styles as needed */
+}
+
+/* Highlight start node during visualization */
+.node-start-visualizing {
+    background-color: green !important;
+    border: 2px solid darkgreen;
+    z-index: 2; /* Ensure it stays above visited nodes */
+  }
+  
+  /* Highlight finish node during visualization */
+  .node-finish-visualizing {
+    background-color: red !important;
+    border: 2px solid darkred;
+    z-index: 2; /* Ensure it stays above visited nodes */
+  }
+  
+  /* Arrow styles for visited nodes */
+.node-visited::after,
+.node-shortest-path::after {
+  content: ''; /* Default arrow content */
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
+  /* More styles for arrow direction */
+}
+
+/* Prevent arrows on start and finish nodes */
+.node-start-visualizing::after,
+.node-finish-visualizing::after {
+  content: none;
+}
+
+/* Wall node style */
+.node-wall {
+    background-color: black;
+    border: none;
+}
+
+/* Visited node animation */
+.node-visited {
+    background-color: lightblue;
+    animation: visited-animation 0.6s ease-in-out;
+}
+
+@keyframes visited-animation {
+    0% {
+        transform: scale(0.5);
+        background-color: rgba(175, 216, 248, 0.3);
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: rgba(175, 216, 248, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        background-color: lightblue;
+    }
+}
+
+/* Shortest path node animation */
+.node-shortest-path {
+    background-color: yellow;
+    animation: shortest-path-animation 0.8s ease-in-out;
+}
+
+@keyframes shortest-path-animation {
+    0% {
+        transform: scale(0.8);
+        background-color: rgba(255, 255, 0, 0.3);
+    }
+    50% {
+        transform: scale(1.1);
+        background-color: rgba(255, 255, 0, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        background-color: yellow;
+    }
+}
+
+.node-weighted {
+    background-color: orange;
+    position: relative;
+  }
+  
+  .weight-label {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  

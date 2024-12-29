@@ -1,0 +1,46 @@
+/* App.css */
+.App {
+  text-align: center;
+  background-color: #1a1a1a;
+  color: white;
+  min-height: 100vh;
+}
+
+button {
+  background-color: #0051ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #0033cc;
+}
+
+select,
+input {
+  padding: 8px;
+  border: 1px solid #333;
+  background-color: #232323;
+  color: white;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+header {
+  font-size: 2rem;
+  color: white;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  text-shadow: 1px 1px 5px #333;
+}
