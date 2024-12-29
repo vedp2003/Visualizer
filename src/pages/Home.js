@@ -9,7 +9,7 @@ export default function Home() {
       <Header /> {/* Add Header */}
       <header>
         <h1>Algorithm and Data Structure Visualizer</h1>
-        <p>Explore, learn, and visualize data structures and algorithms!</p>
+        <p>Explore, learn, and visualize data structures & algorithms!</p>
       </header>
       <section className="categories">
         <div className="category">
