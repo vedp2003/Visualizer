@@ -1,5 +1,5 @@
-import "../styles/Node.css";
 import React from "react";
+import "../styles/Node.css";
 import { motion } from "framer-motion";
 
 export default function Node({ value, next, color }) {
