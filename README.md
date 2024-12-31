@@ -1,4 +1,54 @@
-# Visualizer
+# Algorithm and Data Structure Visualizer
+
+https://visualiz.netlify.app/ 
+
+Welcome to the **Algorithm and Data Structure Visualizer**, a web-based platform to help you learn and visualize various data structures and algorithms interactively. This tool provides a hands-on experience to explore the fundamental concepts of data structures and algorithms, including linked lists, stacks, queues, and graph traversal like Dijkstra's algorithm.
+
+## Features
+
+### 1. Singly Linked List Visualizer
+- **Interactive Visualization**: View functions like Push, Pop, Shift, Unshift, Set, Insert, Remove, Reverse in a singly linked list.
+- **Real-time Updates**: See changes reflected immediately on the screen.
+- **Highlights**: Understand how nodes are linked through "next" pointers.
+
+### 2. Doubly Linked List Visualizer
+- **Interactive Visualization**:View functions like Push, Pop, Shift, Unshift, Set, Insert, Remove, Reverse in a doubly linked list.
+- **Bidirectional Navigation**: See "next" and "previous" pointers in action.
+
+### 3. Stack Visualizer
+- **LIFO Structure**: Learn how stacks work using the Last-In-First-Out principle.
+- **Interactive Operations**:
+  - Push: Add elements to the stack.
+  - Pop: Remove elements from the top of the stack.
+- **Real-time Visualization**: Watch elements being added or removed dynamically.
+
+### 4. Queue Visualizer
+- **FIFO Structure**: Explore the First-In-First-Out principle of queues.
+- **Interactive Operations**:
+  - Enqueue: Add elements to the back of the queue.
+  - Dequeue: Remove elements from the front of the queue.
+- **Visualization**: See the order of elements and how they flow through the queue.
+
+### 5. Dijkstra's Algorithm Visualizer
+- **Pathfinding Algorithm**: Learn how Dijkstra's algorithm finds the shortest path in a weighted graph.
+- **Features**:
+  - **Start Node**: Drag the green start node to any position.
+  - **End Node**: Drag the red end node to any position.
+  - **Walls**: Click and drag to create impassable barriers on the grid.
+  - **Weights**:
+    - Toggle weight mode and assign weights to specific nodes.
+    - Weighted nodes cost more to traverse compared to unweighted nodes.
+  - **Shortest Path**: The algorithm highlights the shortest path in yellow after execution.
+- **Visualization Steps**:
+  - Nodes visited are shown dynamically as the algorithm progresses.
+  - Real-time pathfinding visualization with animations.
+
+## Tech Stack
+
+- **Frontend**: React.js (with Hooks)
+- **Animation**: Framer Motion for smooth visual transitions
+- **Styling**: CSS for a clean and responsive UI
+- **Hosting**: Deployed on [Netlify](https://visualiz.netlify.app/)
 
 # Getting Started with Create React App
 
