@@ -6,10 +6,10 @@ import DijkstraLegend from "./DijkstraLegend";
 import { dijkstra, getNodesInShortestPathOrder } from "../../models/DijkstraModel";
 import "../../styles/DijkstraVisualizer.css";
 
-let START_NODE_ROW = Math.floor(20 * 0.5); // Middle of default grid size
-let START_NODE_COL = Math.floor(50 * 0.1); // 10% from the left
-let FINISH_NODE_ROW = Math.floor(20 * 0.5); // Middle of default grid size
-let FINISH_NODE_COL = Math.floor(50 * 0.7); // 70% from the left
+let START_NODE_ROW = Math.floor(20 * 0.5); 
+let START_NODE_COL = Math.floor(50 * 0.1); 
+let FINISH_NODE_ROW = Math.floor(20 * 0.5); 
+let FINISH_NODE_COL = Math.floor(50 * 0.7); 
 
 
 export default function DijkstraGrid() {
@@ -23,20 +23,20 @@ export default function DijkstraGrid() {
   const [canVisualize, setCanVisualize] = useState(true);
 
   const calculateGridSize = () => {
-    const nodeSize = 32; // Size of each node including gaps
-    const padding = 100; // Approximate height for header and toolbar
-    const rows = Math.floor((window.innerHeight - padding) / nodeSize);
-    const cols = Math.floor(window.innerWidth / nodeSize);
+    const nodeSize = 32; 
+    const padding = 100; 
+    const rows = Math.max(Math.floor((window.innerHeight - padding) / nodeSize), 5);
+    const cols = Math.max(Math.floor(window.innerWidth / nodeSize), 5);
     return { rows, cols };
   };
 
   const initializeGrid = useCallback(() => {
     const { rows, cols } = calculateGridSize();
   
-    START_NODE_ROW = Math.min(START_NODE_ROW, rows - 1);
-    START_NODE_COL = Math.min(START_NODE_COL, cols - 1);
-    FINISH_NODE_ROW = Math.min(FINISH_NODE_ROW, rows - 1);
-    FINISH_NODE_COL = Math.min(FINISH_NODE_COL, cols - 1);
+    START_NODE_ROW = Math.min(Math.floor(rows * 0.5), rows - 1);
+    START_NODE_COL = Math.min(Math.floor(cols * 0.1), cols - 1);
+    FINISH_NODE_ROW = Math.min(Math.floor(rows * 0.5), rows - 1);
+    FINISH_NODE_COL = Math.min(Math.floor(cols * 0.7), cols - 1);
   
     const initialGrid = createInitialGrid(rows, cols);
     setGridSize({ rows, cols });
@@ -194,13 +194,14 @@ export default function DijkstraGrid() {
   };
 
   const clearBoard = () => {
+    
     const initialGrid = createInitialGrid(gridSize.rows, gridSize.cols);
-    setGrid(initialGrid);
+    START_NODE_ROW = Math.min(gridSize.rows - 1, START_NODE_ROW);
+  START_NODE_COL = Math.min(gridSize.cols - 1, START_NODE_COL);
+  FINISH_NODE_ROW = Math.min(gridSize.rows - 1, FINISH_NODE_ROW);
+  FINISH_NODE_COL = Math.min(gridSize.cols - 1, FINISH_NODE_COL);
 
-    START_NODE_ROW = 10;
-    START_NODE_COL = 5;
-    FINISH_NODE_ROW = 10;
-    FINISH_NODE_COL = 35;
+    setGrid(initialGrid);
 
     setAlgorithmRunning(false);
     setCanVisualize(true);

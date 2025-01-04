@@ -117,20 +117,22 @@
     justify-content: center;
     gap: 2px;
     width: 100%; 
-    height: calc(100vh - 200px); /* Dynamically adjust for toolbar/header */
+    height: min(calc(100vh - 200px), 80vh);
     max-height: 90%;
     overflow: hidden;
 }
 
 @media screen and (max-width: 768px) {
     .grid {
-        grid-template-columns: repeat(auto-fit, minmax(20px, 1fr)); /* Adjust for smaller screens */
+        grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
         width: 100%; 
-        height: calc(100vh - 150px); /* Slightly reduced height for mobile */
-        overflow-y: auto; /* Allow vertical scrolling for smaller screens */
+        height: min(calc(100vh - 150px), 75vh);
+        overflow-y: auto; 
     }
 
     .node {
+        min-width: 15px;
+        min-height: 15px;
         width: 20px;
         height: 20px;
     }
