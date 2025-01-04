@@ -136,7 +136,10 @@
     }
   
     .weight-label {
-      font-size: 0.5rem; /* Smaller text for weights */
+      font-size: 0.5rem;
     }
   }
-  
+  .node-active {
+    border: 2px dashed #ffa500;
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+  }

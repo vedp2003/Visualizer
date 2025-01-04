@@ -21,6 +21,7 @@ export default function DijkstraGrid() {
   const [weightValue, setWeightValue] = useState(1);
   const [gridSize, setGridSize] = useState({ rows: 20, cols: 50 });
   const [canVisualize, setCanVisualize] = useState(true);
+  const [activeNode, setActiveNode] = useState(null); 
 
   const calculateGridSize = () => {
     const nodeSize = 32; 
@@ -58,10 +59,13 @@ export default function DijkstraGrid() {
 
   const handleMouseDown = (row, col) => {
     if (algorithmRunning) return;
+
     if (row === START_NODE_ROW && col === START_NODE_COL) {
       setDraggingNode("start");
+      setActiveNode("start"); 
     } else if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) {
       setDraggingNode("finish");
+      setActiveNode("finish");
     } else {
       if (weightMode) {
         const newGrid = toggleWeight(grid, row, col, weightValue);
@@ -112,6 +116,38 @@ export default function DijkstraGrid() {
     }
   };
 
+  const handleTapMove = (row, col) => {
+    if (!activeNode || algorithmRunning) return; 
+  
+    if (activeNode === "start") {
+      if (
+        (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) ||
+        grid[row]?.[col]?.isWall ||
+        grid[row]?.[col]?.weight > 1
+      )
+        return;
+  
+      START_NODE_ROW = row;
+      START_NODE_COL = col;
+      const newGrid = updateNode(grid, row, col, "start");
+      setGrid(newGrid);
+    } else if (activeNode === "finish") {
+      if (
+        (row === START_NODE_ROW && col === START_NODE_COL) ||
+        grid[row]?.[col]?.isWall ||
+        grid[row]?.[col]?.weight > 1
+      )
+        return;
+  
+      FINISH_NODE_ROW = row;
+      FINISH_NODE_COL = col;
+      const newGrid = updateNode(grid, row, col, "finish");
+      setGrid(newGrid);
+    }
+  
+    setActiveNode(null);
+  };
+  
   const handleMouseUp = () => {
     setMouseIsPressed(false);
     setDraggingNode(null);
@@ -264,6 +300,9 @@ export default function DijkstraGrid() {
                   onMouseDown={handleMouseDown}
                   onMouseEnter={handleMouseEnter}
                   onMouseUp={handleMouseUp}
+                  onClick={handleTapMove} 
+                  onTouchStart={handleTapMove} 
+                  activeNode={activeNode} 
                 />
               );
             })}
