@@ -124,4 +124,19 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  @media screen and (max-width: 768px) {
+    .node {
+      width: 20px; /* Reduce node size */
+      height: 20px;
+    }
+  
+    .node-start,
+    .node-finish {
+      border-radius: 3px; /* Adjust radius for smaller nodes */
+    }
+  
+    .weight-label {
+      font-size: 0.5rem; /* Smaller text for weights */
+    }
+  }
   

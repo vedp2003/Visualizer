@@ -8,15 +8,20 @@ export const dijkstra = (grid, startNode, finishNode) => {
       const closestNode = unvisitedNodes.shift();
   
       if (closestNode.isWall) continue; // Skip walls
-      if (closestNode.distance === Infinity) return visitedNodesInOrder;
-  
+      if (closestNode.distance === Infinity) {
+        return { visitedNodesInOrder, pathFound: false };
+      }
       closestNode.isVisited = true;
       visitedNodesInOrder.push(closestNode);
   
-      if (closestNode === finishNode) return visitedNodesInOrder;
-  
+      if (closestNode === finishNode) {
+        return { visitedNodesInOrder, pathFound: true };
+      }
+            
       updateUnvisitedNeighbors(closestNode, grid);
     }
+    return { visitedNodesInOrder, pathFound: false };
+
   };
   
   const sortNodesByDistance = (unvisitedNodes) => {

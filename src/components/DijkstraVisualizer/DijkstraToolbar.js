@@ -9,6 +9,8 @@ export default function DijkstraToolbar({
   setWeightMode,
   setWeightValue,
   clearWeights,
+  algorithmRunning,
+  canVisualize,
 }) {
   const [weightInput, setWeightInput] = useState(""); 
 
@@ -39,10 +41,10 @@ export default function DijkstraToolbar({
 
   return (
     <div className="toolbar">
-      <button onClick={visualizeDijkstra}>Visualize Dijkstra</button>
-      <button onClick={clearBoard}>Clear Board</button>
-      <button onClick={clearWalls}>Clear Walls</button>
-      <button onClick={clearWeights}>Clear Weights</button> 
+      <button onClick={visualizeDijkstra} disabled={!canVisualize || algorithmRunning}>Visualize Dijkstra</button>
+      <button onClick={clearBoard} disabled={algorithmRunning}>Clear Board</button>
+      <button onClick={clearWalls} disabled={algorithmRunning}>Clear Walls</button>
+      <button onClick={clearWeights} disabled={algorithmRunning}>Clear Weights</button> 
       <div className="weight-input-container">
         <label htmlFor="weight-input">Weight:</label>
         <input

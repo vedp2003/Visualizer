@@ -5,95 +5,133 @@
     border: 1px solid #ccc;
     display: inline-block;
     transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  /* Start Node */
-  .node-start {
+    box-sizing: border-box;
+}
+
+/* Start Node */
+.node-start {
     background-color: green;
     border: 2px solid darkgreen;
-  }
-  
-  /* Finish Node */
-  .node-finish {
+    border-radius: 5px;
+}
+
+/* Finish Node */
+.node-finish {
     background-color: red;
     border: 2px solid darkred;
-  }
-  
-  /* Wall Node */
-  .node-wall {
+    border-radius: 5px;
+}
+
+/* Wall Node */
+.node-wall {
     background-color: black;
-  }
-  
-  /* Visited Node */
-  .node-visited {
+    border: none;
+}
+
+/* Visited Node */
+.node-visited {
     background-color: lightblue;
     animation: visited-animation 0.6s ease-in-out;
-  }
-  
-  /* Shortest Path Node */
-  .node-shortest-path {
+}
+
+/* Shortest Path Node */
+.node-shortest-path {
     background-color: yellow;
-  }
-  
-  /* Marker for the start of the shortest path */
-  .start-marker {
+}
+
+/* Marker for the start of the shortest path */
+.start-marker {
     position: relative;
     border: 3px solid green;
     animation: pulse-start 1s infinite;
-  }
-  
-  /* Marker for the end of the shortest path */
-  .end-marker {
+}
+
+/* Marker for the end of the shortest path */
+.end-marker {
     position: relative;
     border: 3px solid red;
     animation: pulse-end 1s infinite;
-  }
-  
-  /* Animation for the start marker */
-  @keyframes pulse-start {
+}
+
+/* Animation for the start marker */
+@keyframes pulse-start {
     0% {
-      transform: scale(1);
-      border-color: rgba(0, 255, 0, 0.5);
+        transform: scale(1);
+        border-color: rgba(0, 255, 0, 0.5);
     }
     50% {
-      transform: scale(1.2);
-      border-color: rgba(0, 255, 0, 1);
+        transform: scale(1.2);
+        border-color: rgba(0, 255, 0, 1);
     }
     100% {
-      transform: scale(1);
-      border-color: rgba(0, 255, 0, 0.5);
+        transform: scale(1);
+        border-color: rgba(0, 255, 0, 0.5);
     }
-  }
-  
-  /* Animation for the end marker */
-  @keyframes pulse-end {
+}
+
+/* Animation for the end marker */
+@keyframes pulse-end {
     0% {
-      transform: scale(1);
-      border-color: rgba(255, 0, 0, 0.5);
+        transform: scale(1);
+        border-color: rgba(255, 0, 0, 0.5);
     }
     50% {
-      transform: scale(1.2);
-      border-color: rgba(255, 0, 0, 1);
+        transform: scale(1.2);
+        border-color: rgba(255, 0, 0, 1);
     }
     100% {
-      transform: scale(1);
-      border-color: rgba(255, 0, 0, 0.5);
+        transform: scale(1);
+        border-color: rgba(255, 0, 0, 0.5);
     }
-  }
-  
-  /* Shortest Path Animation */
-  @keyframes visited-animation {
+}
+
+/* Shortest Path Animation */
+@keyframes visited-animation {
     0% {
-      transform: scale(0.5);
-      background-color: rgba(175, 216, 248, 0.3);
+        transform: scale(0.5);
+        background-color: rgba(175, 216, 248, 0.3);
     }
     50% {
-      transform: scale(1.2);
-      background-color: rgba(175, 216, 248, 0.8);
+        transform: scale(1.2);
+        background-color: rgba(175, 216, 248, 0.8);
     }
     100% {
-      transform: scale(1);
-      background-color: lightblue;
+        transform: scale(1);
+        background-color: lightblue;
     }
-  }
-  
+}
+
+/* Dijkstra Visualizer Grid */
+.dijkstra-visualizer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-template-columns: repeat(auto-fit, 1fr);
+    align-items: center; 
+    justify-content: center;
+    gap: 2px;
+    width: 100%; 
+    height: calc(100vh - 200px); /* Dynamically adjust for toolbar/header */
+    max-height: 90%;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(20px, 1fr)); /* Adjust for smaller screens */
+        width: 100%; 
+        height: calc(100vh - 150px); /* Slightly reduced height for mobile */
+        overflow-y: auto; /* Allow vertical scrolling for smaller screens */
+    }
+
+    .node {
+        width: 20px;
+        height: 20px;
+    }
+}

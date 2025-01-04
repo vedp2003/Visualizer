@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback  } from "react";
 import Header from "../Header";
 import DijkstraNode from "./DijkstraNode";
 import DijkstraToolbar from "./DijkstraToolbar";
@@ -6,10 +6,11 @@ import DijkstraLegend from "./DijkstraLegend";
 import { dijkstra, getNodesInShortestPathOrder } from "../../models/DijkstraModel";
 import "../../styles/DijkstraVisualizer.css";
 
-let START_NODE_ROW = 10;
-let START_NODE_COL = 5;
-let FINISH_NODE_ROW = 10;
-let FINISH_NODE_COL = 35;
+let START_NODE_ROW = Math.floor(20 * 0.5); // Middle of default grid size
+let START_NODE_COL = Math.floor(50 * 0.1); // 10% from the left
+let FINISH_NODE_ROW = Math.floor(20 * 0.5); // Middle of default grid size
+let FINISH_NODE_COL = Math.floor(50 * 0.7); // 70% from the left
+
 
 export default function DijkstraGrid() {
   const [grid, setGrid] = useState([]);
@@ -18,11 +19,42 @@ export default function DijkstraGrid() {
   const [algorithmRunning, setAlgorithmRunning] = useState(false);
   const [weightMode, setWeightMode] = useState(false);
   const [weightValue, setWeightValue] = useState(1);
+  const [gridSize, setGridSize] = useState({ rows: 20, cols: 50 });
+  const [canVisualize, setCanVisualize] = useState(true);
 
-  useEffect(() => {
-    const initialGrid = createInitialGrid();
+  const calculateGridSize = () => {
+    const nodeSize = 32; // Size of each node including gaps
+    const padding = 100; // Approximate height for header and toolbar
+    const rows = Math.floor((window.innerHeight - padding) / nodeSize);
+    const cols = Math.floor(window.innerWidth / nodeSize);
+    return { rows, cols };
+  };
+
+  const initializeGrid = useCallback(() => {
+    const { rows, cols } = calculateGridSize();
+  
+    START_NODE_ROW = Math.min(START_NODE_ROW, rows - 1);
+    START_NODE_COL = Math.min(START_NODE_COL, cols - 1);
+    FINISH_NODE_ROW = Math.min(FINISH_NODE_ROW, rows - 1);
+    FINISH_NODE_COL = Math.min(FINISH_NODE_COL, cols - 1);
+  
+    const initialGrid = createInitialGrid(rows, cols);
+    setGridSize({ rows, cols });
     setGrid(initialGrid);
   }, []);
+
+  useEffect(() => {
+    initializeGrid(); 
+    const handleResize = () => {
+      initializeGrid(); 
+    };
+    window.addEventListener("resize", handleResize); 
+
+    return () => {
+      window.removeEventListener("resize", handleResize); 
+    };
+  }, [initializeGrid]);
+
 
   const handleMouseDown = (row, col) => {
     if (algorithmRunning) return;
@@ -45,16 +77,25 @@ export default function DijkstraGrid() {
   const handleMouseEnter = (row, col) => {
     if (!mouseIsPressed || algorithmRunning) return;
 
-    // Prevent moving start/finish nodes onto walls or weighted nodes
     if (draggingNode === "start") {
-      if (grid[row][col].isWall || grid[row][col].weight > 1) return;
+      if (
+        (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) ||
+        grid[row]?.[col]?.isWall ||
+        grid[row]?.[col]?.weight > 1
+      )
+        return;
 
       START_NODE_ROW = row;
       START_NODE_COL = col;
       const newGrid = updateNode(grid, row, col, "start");
       setGrid(newGrid);
     } else if (draggingNode === "finish") {
-      if (grid[row][col].isWall || grid[row][col].weight > 1) return;
+      if (
+        (row === START_NODE_ROW && col === START_NODE_COL) ||
+        grid[row]?.[col]?.isWall ||
+        grid[row]?.[col]?.weight > 1
+      )
+        return;
 
       FINISH_NODE_ROW = row;
       FINISH_NODE_COL = col;
@@ -77,18 +118,23 @@ export default function DijkstraGrid() {
   };
 
   const visualizeDijkstra = () => {
-    setAlgorithmRunning(true); // Disable editing during visualization
+    if (!canVisualize) return;
+
+    setAlgorithmRunning(true);
+    setCanVisualize(false);
+
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    const { visitedNodesInOrder, pathFound } = dijkstra(grid, startNode, finishNode);
 
-    if (!visitedNodesInOrder || !nodesInShortestPathOrder) {
-      console.error("Error: Dijkstra algorithm failed.");
+    if (!pathFound) {
+      alert("No path found!");
       setAlgorithmRunning(false);
+      setCanVisualize(true);
       return;
     }
 
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   };
 
@@ -112,7 +158,7 @@ export default function DijkstraGrid() {
           if (startElement) startElement.classList.remove("node-start-visualizing");
           if (finishElement) finishElement.classList.remove("node-finish-visualizing");
 
-          //setAlgorithmRunning(false); 
+          setAlgorithmRunning(false);
         }, 10 * i);
         return;
       }
@@ -148,14 +194,16 @@ export default function DijkstraGrid() {
   };
 
   const clearBoard = () => {
+    const initialGrid = createInitialGrid(gridSize.rows, gridSize.cols);
+    setGrid(initialGrid);
+
     START_NODE_ROW = 10;
     START_NODE_COL = 5;
     FINISH_NODE_ROW = 10;
     FINISH_NODE_COL = 35;
 
-    const initialGrid = createInitialGrid();
-    setGrid(initialGrid);
     setAlgorithmRunning(false);
+    setCanVisualize(true);
 
     document.querySelectorAll(".node").forEach((node) => {
       node.className = "node";
@@ -176,6 +224,7 @@ export default function DijkstraGrid() {
   };
 
   const clearWeights = () => {
+    if (algorithmRunning) return;
     const newGrid = grid.map((row) =>
       row.map((node) => ({ ...node, weight: 1 }))
     );
@@ -193,6 +242,8 @@ export default function DijkstraGrid() {
         setWeightMode={setWeightMode}
         setWeightValue={setWeightValue}
         clearWeights={clearWeights}
+        algorithmRunning={algorithmRunning}
+        canVisualize={canVisualize}
       />
       <DijkstraLegend />
       <div className="grid">
@@ -222,11 +273,11 @@ export default function DijkstraGrid() {
   );
 }
 
-const createInitialGrid = () => {
+const createInitialGrid = (rows, cols) => {
   const grid = [];
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < rows; row++) {
     const currentRow = [];
-    for (let col = 0; col < 50; col++) {
+    for (let col = 0; col < cols; col++) {
       currentRow.push(createNode(row, col));
     }
     grid.push(currentRow);
